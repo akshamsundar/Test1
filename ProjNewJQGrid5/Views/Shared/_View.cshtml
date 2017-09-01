@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ProjNewJQGrid5.UsersNew>
+
+@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Login", "NewUser", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        
+        foreach (var item in Model)
+        {
+
+                    if (item.UserId != null)
+
+                    {
+
+                        if (item.UserId == User.Identity.GetUserName().ToString())
+                        {
+                            string base64String = "data:image/png;base64, " + Convert.ToBase64String(item.ProfileImg, 0, item.ProfileImg.Length);
+                            <img src="@base64String" width="100px" height="100px" />;
+                            
+                        }
+                        
+                    }
+
+        }
+
+
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+     <li>@Html.ActionLink("Log in", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
+

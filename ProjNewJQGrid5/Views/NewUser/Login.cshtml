@@ -1,0 +1,53 @@
+﻿@model ProjNewJQGrid5.UsersNew
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm("Login", "NewUser", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <h2>(Controller - NewUser)Login Details</h2>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "Login failed...check your login details..!")
+
+    <br />
+    <br />
+
+    <div>
+        <fieldset>
+
+            @*<div><input class="input-large" data-bind='value: FirstName' placeholder="First Name" /></div>*@
+
+            <div>@Html.LabelFor(x => x.UserId) placeholder="First Name"</div>
+
+            <div>
+                @Html.TextBoxFor(x => x.UserId)
+                @Html.ValidationMessageFor(x => x.UserId)
+            </div>
+
+            <div>@Html.LabelFor(x => x.Password)</div>
+            <div>
+                @Html.PasswordFor(x => x.Password)
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+
+            <div>
+                <input type="submit" value="Log In" />
+            </div>
+
+        </fieldset>
+
+    </div>
+
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+
+
+
+}

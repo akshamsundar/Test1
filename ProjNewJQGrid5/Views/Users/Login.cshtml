@@ -1,0 +1,48 @@
+﻿@model ProjNewJQGrid5.User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm("Login", "Users", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <h2>(Controller - User)  Login Details</h2>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "Login failed...check your login details..!")
+
+    <br />
+    <br />
+    
+    <div>
+        <fieldset>
+            
+            @*<div><input class="input-large" data-bind='value: FirstName' placeholder="First Name" /></div>*@
+
+            <div>@Html.LabelFor(x=>x.EmailId)</div>
+
+            <div>
+                @Html.TextBoxFor(x=>x.EmailId)  
+                @Html.ValidationMessageFor(x=>x.EmailId)
+            </div>
+
+            <div>@Html.LabelFor(x => x.Password)</div>
+            <div>
+                @Html.PasswordFor(x => x.Password)
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+
+            <div>
+                <input type="submit" value="Log In" />
+            </div>
+
+        </fieldset>
+
+    </div>
+    
+
+
+
+}

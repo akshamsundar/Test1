@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ProjNewJQGrid5.UsersNew>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{ 
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+     <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.PasswordSalt)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ProfileImg)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) 
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+
+          
+            <td>
+                
+                @if (item.UserId != null)
+                { 
+                        string base64String="data:image/png;base64, "+Convert.ToBase64String(item.ProfileImg, 0, item.ProfileImg.Length);
+                        <img src="@base64String" width="250px" />;
+                }
+                
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+            </td>
+
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
+}
+

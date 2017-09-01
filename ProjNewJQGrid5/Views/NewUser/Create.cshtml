@@ -1,0 +1,55 @@
+﻿@model ProjNewJQGrid5.UsersNew
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function fileCheck(obj) {
+        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+        }
+    }
+</script>
+
+@if (Request.IsAuthenticated)
+{
+
+    @(Html.BeginForm("Create", "NewUser", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                                                                       
+   {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "Login failed...check your login details..!")
+
+        <h2>New User Details </h2>
+        
+        <fieldset>
+
+        <div>@Html.LabelFor(x => x.UserId)</div>
+        <div>@Html.TextBoxFor(x=>x.UserId)</div>
+
+        <br />
+            <div>@Html.LabelFor(x => x.Password)</div>
+            <div>@Html.PasswordFor(x => x.Password)</div>
+       <br />
+
+             @*<div> @Html.DisplayFor(x => x.UserId)</div>
+             <div>@Html.TextBoxFor(x => x.UserId)</div>*@
+        <br />
+
+             <div class="row">
+                     <span class="span4">
+                         <input style="cursor:pointer;" type="file" name="file" id="file" multiple="multiple" class="input-files" onchange="fileCheck(this);" />
+                     </span>
+             </div>
+
+             <div>
+                     <span class="span2">
+                         <input type="submit" name="button" value="Save User" />
+                     </span>
+             </div>
+
+        </fieldset>
+    }
+}

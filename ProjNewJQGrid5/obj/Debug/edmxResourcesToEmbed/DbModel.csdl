@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HospitalDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="EmailId" />
+    </Key>
+    <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UsersNew">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileImg" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityContainer Name="MainDbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UsersNews" EntityType="Self.UsersNew" />
+    <FunctionImport Name="CreateUser">
+      <Parameter Name="NEmailId" Mode="In" Type="String" />
+      <Parameter Name="NPassword" Mode="In" Type="String" />
+      <Parameter Name="NPasswordSalt" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteUser">
+      <Parameter Name="NEmailId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateUser">
+      <Parameter Name="NEmailId" Mode="In" Type="String" />
+      <Parameter Name="NPassword" Mode="In" Type="String" />
+      <Parameter Name="NPasswordSalt" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="NCreateUser">
+      <Parameter Name="NEmailId" Mode="In" Type="String" />
+      <Parameter Name="NPassword" Mode="In" Type="String" />
+      <Parameter Name="NPasswordSalt" Mode="In" Type="String" />
+      <Parameter Name="NImage" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="NDeleteUser">
+      <Parameter Name="NEmailId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="NUpdateUser">
+      <Parameter Name="NEmailId" Mode="In" Type="String" />
+      <Parameter Name="NPassword" Mode="In" Type="String" />
+      <Parameter Name="NPasswordSalt" Mode="In" Type="String" />
+      <Parameter Name="NImage" Mode="In" Type="Binary" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

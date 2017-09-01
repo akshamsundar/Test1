@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HospitalDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="UsersNew">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="300" />
+          <Property Name="ProfileImg" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <Function Name="CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NEmailId" Type="varchar" Mode="In" />
+          <Parameter Name="NPassword" Type="varchar" Mode="In" />
+          <Parameter Name="NPasswordSalt" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NEmailId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="NCreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NEmailId" Type="varchar" Mode="In" />
+          <Parameter Name="NPassword" Type="varchar" Mode="In" />
+          <Parameter Name="NPasswordSalt" Type="varchar" Mode="In" />
+          <Parameter Name="NImage" Type="image" Mode="In" />
+        </Function>
+        <Function Name="NDeleteUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NEmailId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="NUpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NEmailId" Type="varchar" Mode="In" />
+          <Parameter Name="NPassword" Type="varchar" Mode="In" />
+          <Parameter Name="NPasswordSalt" Type="varchar" Mode="In" />
+          <Parameter Name="NImage" Type="image" Mode="In" />
+        </Function>
+        <Function Name="UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NEmailId" Type="varchar" Mode="In" />
+          <Parameter Name="NPassword" Type="varchar" Mode="In" />
+          <Parameter Name="NPasswordSalt" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="HospitalDbModelStoreContainer">
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersNew" EntityType="Self.UsersNew" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HospitalDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UsersNew">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileImg" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="MainDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UsersNews" EntityType="Self.UsersNew" />
+          <FunctionImport Name="CreateUser">
+            <Parameter Name="NEmailId" Mode="In" Type="String" />
+            <Parameter Name="NPassword" Mode="In" Type="String" />
+            <Parameter Name="NPasswordSalt" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUser">
+          <Parameter Name="NEmailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUser">
+            <Parameter Name="NEmailId" Mode="In" Type="String" />
+            <Parameter Name="NPassword" Mode="In" Type="String" />
+            <Parameter Name="NPasswordSalt" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NCreateUser">
+            <Parameter Name="NEmailId" Mode="In" Type="String" />
+            <Parameter Name="NPassword" Mode="In" Type="String" />
+            <Parameter Name="NPasswordSalt" Mode="In" Type="String" />
+            <Parameter Name="NImage" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="NDeleteUser">
+          <Parameter Name="NEmailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NUpdateUser">
+            <Parameter Name="NEmailId" Mode="In" Type="String" />
+            <Parameter Name="NPassword" Mode="In" Type="String" />
+            <Parameter Name="NPasswordSalt" Mode="In" Type="String" />
+            <Parameter Name="NImage" Mode="In" Type="Binary" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HospitalDbModelStoreContainer" CdmEntityContainer="MainDbContext">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HospitalDbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersNews">
+            <EntityTypeMapping TypeName="HospitalDbModel.UsersNew">
+              <MappingFragment StoreEntitySet="UsersNew">
+                <ScalarProperty Name="ProfileImg" ColumnName="ProfileImg" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="HospitalDbModel.Store.CreateUser" />
+          <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="HospitalDbModel.Store.DeleteUser" />
+          <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="HospitalDbModel.Store.UpdateUser" />
+          <FunctionImportMapping FunctionImportName="NCreateUser" FunctionName="HospitalDbModel.Store.NCreateUser" />
+          <FunctionImportMapping FunctionImportName="NDeleteUser" FunctionName="HospitalDbModel.Store.NDeleteUser" />
+          <FunctionImportMapping FunctionImportName="NUpdateUser" FunctionName="HospitalDbModel.Store.NUpdateUser" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

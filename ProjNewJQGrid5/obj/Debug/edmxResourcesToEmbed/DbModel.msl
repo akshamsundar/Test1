@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HospitalDbModelStoreContainer" CdmEntityContainer="MainDbContext">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="HospitalDbModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsersNews">
+      <EntityTypeMapping TypeName="HospitalDbModel.UsersNew">
+        <MappingFragment StoreEntitySet="UsersNew">
+          <ScalarProperty Name="ProfileImg" ColumnName="ProfileImg" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CreateUser" FunctionName="HospitalDbModel.Store.CreateUser" />
+    <FunctionImportMapping FunctionImportName="DeleteUser" FunctionName="HospitalDbModel.Store.DeleteUser" />
+    <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="HospitalDbModel.Store.UpdateUser" />
+    <FunctionImportMapping FunctionImportName="NCreateUser" FunctionName="HospitalDbModel.Store.NCreateUser" />
+    <FunctionImportMapping FunctionImportName="NDeleteUser" FunctionName="HospitalDbModel.Store.NDeleteUser" />
+    <FunctionImportMapping FunctionImportName="NUpdateUser" FunctionName="HospitalDbModel.Store.NUpdateUser" />
+  </EntityContainerMapping>
+</Mapping>
